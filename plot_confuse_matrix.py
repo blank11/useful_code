@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import numpy as np
 # %matplotlib inline # ipynb
 
 def plot_confuse_matrix(cm, classes, normalized=False, title='Confuse Matrix', plt.cm.Blues):
