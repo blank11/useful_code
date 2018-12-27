@@ -25,13 +25,13 @@ model.vocab.keys()  # 语料库中所有的词
 
 # Step3: phrase vector
 def get_phrase_embedding(phrase):
-	vector = np.zeros([len(model.vector_size)], dtype='float32')
+	vector = np.zeros([model.vector_size], dtype='float32')
 	phrase = tokenizer.tokenize(phrase.lower())
 	num = 0
 
 	for i in range(len(phrase)):
-		if phrase[i] in model.vocab.keys():
-			vector = vector + model.get_vector(phrase[i])
+		if phrase[i] in model.wv.vocab.keys():
+			vector = vector + model.wv.get_vector(phrase[i])
 			num = num + 1
 
 	vector = vector / num
@@ -58,7 +58,7 @@ def find_nearest(query, data_vectors, data, k=10):
 
 	distance_index = np.argsort(-distance)
 	most_k_similar = []
-	for i in range(k):
-		most_k_similar = most_k_similar + data[i]
+	for i, j in enumerate(list(distance_index[0: k])):
+		most_k_similar = most_k_similar + data[j]
 
 	return most_k_similar
